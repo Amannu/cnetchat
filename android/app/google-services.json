@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "694956671785",
+    "project_id": "cnetchat-a55b7",
+    "storage_bucket": "cnetchat-a55b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694956671785:android:1c2e20dccca3cc531d2d38",
+        "android_client_info": {
+          "package_name": "com.example.cnetchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694956671785-ucu08ncivahhvo47nnspqvcc7fhkp4mg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cnetchat",
+            "certificate_hash": "80b75d2c330c213b6dcf294376cdc3e8c8537936"
+          }
+        },
+        {
+          "client_id": "694956671785-cka1jed2mm3vqjjgo743jr2krvni5hfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPLJCFZn_VtHPM-Tz6E-ppvDdkAmakYys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694956671785-cka1jed2mm3vqjjgo743jr2krvni5hfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
