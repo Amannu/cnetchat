@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/chat.dart';
+import 'Screens/chat_login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +16,14 @@ class CnetChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ChatUser('Alemu','Abebe','0924492953','https://google.com'),
+      home: SafeArea(
+        child: Scaffold(
+    body: const Login(),
+    ),
+      ),
     );
   }
 }

@@ -7,8 +7,8 @@ class ChatUser extends StatefulWidget {
   final String firstname;
   final String lastname;
   final String phone;
-  final String photourl;
-  const ChatUser(this.firstname,this.lastname,this.phone,this.photourl);
+  final String password;
+  const ChatUser(this.firstname,this.lastname,this.phone,this.password);
 
   @override
   State<ChatUser> createState() => _ChatUserState();
@@ -28,7 +28,7 @@ class _ChatUserState extends State<ChatUser> {
         'firstname': widget.firstname,
         'lastname': widget.lastname,
         'phone': widget.phone,
-        'photourl':widget.photourl
+        'password':widget.password
       });
     }
     addUser();
