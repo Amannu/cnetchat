@@ -11,7 +11,6 @@ class ChatUserProvider with ChangeNotifier {
         .collection('users')
         .doc(phone)
         .get();
-
     _user = ChatUserModel.fromMap(documentSnapshot.data() as Map<String, dynamic>);
     notifyListeners();
   }

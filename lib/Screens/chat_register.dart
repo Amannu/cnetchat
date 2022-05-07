@@ -1,9 +1,7 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cnetchat/Screens/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chat_home_page.dart';
 import 'chat_login.dart';
@@ -26,8 +24,8 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(right: 10,left: 10),
-        height: 488,
+        margin: const EdgeInsets.only(right: 10,left: 10),
+        height: 508,
         decoration: BoxDecoration(
             color: Colors.blueGrey[50],
             borderRadius: BorderRadius.circular(10)
@@ -37,7 +35,7 @@ class _RegisterState extends State<Register> {
           child: Column(
             children:  [
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty || RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(value)) {
@@ -46,11 +44,11 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                   controller: firstNameController,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: "SignikaSemiBold",
                       fontSize: 16.0,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(
                         Icons.person_add,
                         color: Colors.black,
@@ -63,7 +61,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty || RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(value)) {
@@ -72,11 +70,11 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                   controller: lastNameController,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: "SignikaSemiBold",
                       fontSize: 16.0,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(
                         Icons.person_add_alt,
                         color: Colors.black,
@@ -89,7 +87,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validator: (value) {
@@ -99,11 +97,11 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                   controller: phoneController,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: "SignikaSemiBold",
                       fontSize: 16.0,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(
                         Icons.phone,
                         color: Colors.black,
@@ -116,7 +114,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   validator: (value){
                     if (value == null || value.isEmpty || value.length<8) {
@@ -128,11 +126,11 @@ class _RegisterState extends State<Register> {
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: "SignikaSemiBold",
                       fontSize: 16.0,
                       color: Colors.black),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       icon: Icon(
                         Icons.password,
                         color: Colors.black,
@@ -145,12 +143,12 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child:  MaterialButton(
                   minWidth: 100,
                   shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0) ),
                   color: Colors.transparent,
-                  child: Text('Register',
+                  child: const Text('Register',
                       style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 18.0, color: Colors.black)),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()){
@@ -159,7 +157,6 @@ class _RegisterState extends State<Register> {
                       setState(() {
                         phonenumberexist=true;
                       });
-                      print('available');
                     }
                     else{
                       CollectionReference _users = FirebaseFirestore.instance.collection('users');
@@ -171,27 +168,28 @@ class _RegisterState extends State<Register> {
                         'phone': phoneController.text,
                         'password':passwordController.text
                       });
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setString("phone", phoneController.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) =>ChatHomePage(phone: phoneController.text,)));
-                      print('Registered');
                     }}
                   },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(phonenumberexist?'Phone Number Exists!':'',style: TextStyle(color: Colors.red),),
+                child: Text(phonenumberexist?'Phone Number Exists!':'',style: const TextStyle(color: Colors.red),),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have account?",
+                  const Text("Already have account?",
                       style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 16.0, color: Colors.black)),
                   MaterialButton(
                     elevation: 0,
                     color: Colors.transparent,
-                    child: Text('Log In',
+                    child: const Text('Log In',
                         style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 18.0, color: Colors.black)),
                     onPressed: () {
                       Navigator.push(
@@ -201,9 +199,9 @@ class _RegisterState extends State<Register> {
                           theme: ThemeData(
                             primarySwatch: Colors.blue,
                           ),
-                          home: SafeArea(
+                          home: const SafeArea(
                             child: Scaffold(
-                              body: const Login(),
+                              body: Login(),
                             ),
                           ),
                         )));

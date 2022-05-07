@@ -1,9 +1,7 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chat_home_page.dart';
 import 'chat_register.dart';
@@ -24,7 +22,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(right: 10,left: 10),
+        margin: const EdgeInsets.only(right: 10,left: 10),
         height: 350,
         decoration: BoxDecoration(
           color: Colors.blueGrey[50],
@@ -35,7 +33,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children:  [
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   validator: (value) {
@@ -45,11 +43,11 @@ class _LoginState extends State<Login> {
                     return null;
                   },
                   controller: phoneController,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: "SignikaSemiBold",
                     fontSize: 16.0,
                     color: Colors.black),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     icon: Icon(
                       Icons.phone,
                       color: Colors.black,
@@ -62,7 +60,7 @@ class _LoginState extends State<Login> {
             ),
               ),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -74,11 +72,11 @@ class _LoginState extends State<Login> {
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: "SignikaSemiBold",
                         fontSize: 16.0,
                         color: Colors.black),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         icon: Icon(
                           Icons.password,
                           color: Colors.black,
@@ -91,12 +89,12 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child:  MaterialButton(
                     minWidth: 100,
                     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0) ),
                     color: Colors.transparent,
-                    child: Text('LogIn',
+                    child: const Text('LogIn',
                         style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 18.0, color: Colors.black)),
                     onPressed: () async {
                     if (_formKey.currentState!.validate()){
@@ -104,7 +102,8 @@ class _LoginState extends State<Login> {
                       if(users.exists){
                         Map<String, dynamic> data = users.data() as Map<String, dynamic>;
                         if(passwordController.text==data['password']){
-                          print('Succesful');
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          prefs.setString("phone", phoneController.text);
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) =>ChatHomePage(phone: phoneController.text,)));
@@ -113,31 +112,29 @@ class _LoginState extends State<Login> {
                           setState(() {
                             wrongcredential=true;
                           });
-                          print('wrong credentials');
                         }
                       }
                       else{
                         setState(() {
                           wrongcredential=true;
                         });
-                        print('wrong credentials');
                       }}
                     },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(wrongcredential?'Wrong Credentials!':'',style: TextStyle(color: Colors.red),),
+                  child: Text(wrongcredential?'Wrong Credentials!':'',style: const TextStyle(color: Colors.red),),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Doesn't have account?",
+                    const Text("Doesn't have account?",
                         style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 16.0, color: Colors.black)),
                     MaterialButton(
                       elevation: 0,
                       color: Colors.transparent,
-                      child: Text('Register',
+                      child: const Text('Register',
                           style: TextStyle(fontFamily: "SignikaSemiBold",fontSize: 18.0, color: Colors.black)),
                       onPressed: () {
                         Navigator.push(
@@ -147,9 +144,9 @@ class _LoginState extends State<Login> {
                               theme: ThemeData(
                                 primarySwatch: Colors.blue,
                               ),
-                              home: SafeArea(
-                                child: Scaffold(
-                                  body: const Register(),
+                              home: const SafeArea(
+                                child:  Scaffold(
+                                  body: Register(),
                                 ),
                               ),
                             )));
